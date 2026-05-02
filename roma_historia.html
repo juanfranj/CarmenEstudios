@@ -1238,9 +1238,7 @@
     opacity: 0.6;
   }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 900px) {
-    #sidebar { width: 220px; }
+  
     #main { margin-left: 220px; }
     section { padding: 60px 30px; }
     .timeline::before { left: 20px; transform: none; }
@@ -1248,6 +1246,225 @@
     .tl-content, .tl-item:nth-child(odd) .tl-content { max-width: 100%; margin-left: 60px; margin-right: 0; align-items: flex-start; }
     .tl-dot { left: 20px; transform: none; }
     .tl-item:hover .tl-dot { transform: scale(1.3); }
+  }
+
+
+  /* ===== HAMBURGER BUTTON ===== */
+  #hamburger {
+    display: none;
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 200;
+    width: 44px; height: 44px;
+    background: var(--red);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    padding: 0;
+  }
+  #hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--parch);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #hamburger.open span:nth-child(2) { opacity: 0; }
+  #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+  }
+  #overlay.visible { display: block; }
+
+  /* ===== TABLES: force horizontal scroll ===== */
+  .vf-table, .compare-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  .vf-table thead, .vf-table tbody, .vf-table tr,
+  .compare-table thead, .compare-table tbody, .compare-table tr {
+    display: table-row-group;
+  }
+  .vf-table, .compare-table { display: table; }
+
+  .table-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 6px;
+    margin-bottom: 40px;
+  }
+  .table-scroll-wrap .vf-table,
+  .table-scroll-wrap .compare-table {
+    margin-bottom: 0;
+    min-width: 600px;
+  }
+
+  /* ===== MINDMAP scroll wrap ===== */
+  .mindmap-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #mindmap { min-width: 600px; }
+
+  /* ===== MAP scroll wrap ===== */
+  .map-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .map-scroll svg { min-width: 500px; }
+
+  /* ============================================================
+     TABLET  ≤ 900px
+  ============================================================ */
+  @media (max-width: 900px) {
+    #sidebar {
+      width: 260px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 100;
+    }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    #hamburger { display: flex; }
+
+    section { padding: 60px 28px; }
+
+    .timeline::before { left: 18px; transform: none; }
+    .tl-item,
+    .tl-item:nth-child(odd) { flex-direction: column; text-align: left; }
+    .tl-content,
+    .tl-item:nth-child(odd) .tl-content {
+      max-width: 100%;
+      margin-left: 50px;
+      margin-right: 0;
+      align-items: flex-start;
+    }
+    .tl-dot { left: 18px; transform: none; }
+    .tl-item:hover .tl-dot { transform: scale(1.3); }
+
+    .republic-diagram { padding: 0 8px; }
+    .rep-level { gap: 12px; }
+    .rep-box { min-width: 130px; padding: 14px 12px; }
+
+    .quiz-body { padding: 24px 20px; }
+    .quiz-footer { padding: 16px 20px 24px; flex-direction: column; gap: 14px; align-items: flex-start; }
+    .quiz-progress-bar { width: 140px; }
+
+    .hero-title { font-size: 2.6rem; }
+    .hero-description { font-size: 0.92rem; }
+
+    .flashcard-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .info-grid      { grid-template-columns: 1fr; }
+    .summary-grid   { grid-template-columns: 1fr; }
+
+    .pc-label { width: 130px; font-size: 0.72rem; }
+  }
+
+  /* ============================================================
+     MOBILE  ≤ 600px
+  ============================================================ */
+  @media (max-width: 600px) {
+    :root { --sidebar-w: 0px; }
+
+    #hero { padding: 80px 20px 60px; min-height: auto; }
+    .hero-title { font-size: 2rem; }
+    .hero-subtitle { font-size: 0.85rem; letter-spacing: 2px; }
+    .hero-tags { gap: 6px; }
+    .hero-tag { font-size: 0.6rem; padding: 5px 10px; }
+    .hero-description { font-size: 0.88rem; }
+
+    section { padding: 48px 18px; }
+
+    .section-title { font-size: 1.5rem; }
+    .section-intro { font-size: 0.9rem; }
+    .section-eyebrow { font-size: 0.6rem; }
+
+    /* Timeline: single-column, left-aligned */
+    .timeline::before { left: 12px; }
+    .tl-dot { left: 12px; }
+    .tl-content,
+    .tl-item:nth-child(odd) .tl-content { margin-left: 36px; }
+    .tl-card { padding: 12px 14px; }
+    .tl-card h3 { font-size: 0.82rem; }
+    .tl-card p  { font-size: 0.78rem; }
+
+    /* Grids: single column */
+    .info-grid        { grid-template-columns: 1fr; gap: 14px; }
+    .flashcard-grid   { grid-template-columns: 1fr; }
+    .flashcard        { height: 160px; }
+    .terms-grid       { grid-template-columns: 1fr; gap: 10px; }
+    .summary-grid     { grid-template-columns: 1fr; gap: 14px; }
+    .key-dates-bar    { gap: 8px; }
+    .kd-item          { min-width: 100px; padding: 10px 10px; }
+    .kd-item .kd-date { font-size: 1rem; }
+    .kd-item p        { font-size: 0.72rem; }
+
+    /* Republic diagram: single column */
+    .republic-diagram { gap: 0; }
+    .rep-level { flex-direction: column; align-items: center; gap: 10px; }
+    .rep-box   { min-width: 200px; width: 100%; max-width: 300px; }
+
+    /* Comparison bars */
+    .pc-row   { flex-direction: column; gap: 6px; }
+    .pc-label { width: 100%; text-align: left; font-size: 0.78rem; font-weight: bold; }
+    .pc-legend { padding-left: 0; flex-wrap: wrap; }
+
+    /* Chart wrappers */
+    .chart-wrapper { padding: 18px 14px; }
+    .chart-wrapper h4 { font-size: 0.85rem; }
+
+    /* Map legend */
+    .map-legend { flex-direction: column; gap: 8px; }
+
+    /* Quiz */
+    .quiz-header { flex-direction: column; gap: 10px; align-items: flex-start; }
+    .quiz-body   { padding: 20px 16px; }
+    .quiz-footer { padding: 14px 16px 20px; flex-direction: column; gap: 12px; }
+    .quiz-question { font-size: 1rem; }
+    .quiz-option   { font-size: 0.82rem; padding: 12px 14px; }
+    .quiz-progress-bar { width: 100%; }
+    #quiz-progress-text { font-size: 0.6rem; }
+
+    .quiz-result { padding: 40px 20px; }
+    .quiz-result .result-score { font-size: 3.5rem; }
+
+    /* Callout */
+    .callout { padding: 14px 16px; }
+    .callout p { font-size: 0.82rem; }
+
+    /* Info cards */
+    .info-card-header h3 { font-size: 0.82rem; }
+    .info-card-body p    { font-size: 0.82rem; }
+
+    /* Flashcards */
+    .flashcard-front h3 { font-size: 0.88rem; }
+    .flashcard-back p   { font-size: 0.82rem; }
+
+    /* VF Table */
+    .vf-table thead th  { font-size: 0.65rem; padding: 10px 12px; }
+    .vf-table td        { font-size: 0.78rem; padding: 12px 12px; white-space: normal; }
+
+    /* Footer */
+    footer { padding: 28px 20px; }
+
+    /* Sidebar always hidden on mobile, toggled by hamburger */
+    #sidebar { width: 260px; }
+  }
+
+  /* ============================================================
+     SMALL MOBILE  ≤ 380px
+  ============================================================ */
+  @media (max-width: 380px) {
+    .hero-title { font-size: 1.7rem; }
+    section { padding: 40px 14px; }
+    .rep-box { min-width: 160px; }
   }
 
   /* ===== SCROLL ANIMATION ===== */
@@ -1322,6 +1539,12 @@
 
 <!-- MAIN CONTENT -->
 <main id="main">
+<!-- MOBILE HAMBURGER -->
+<button id="hamburger" aria-label="Menu" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</button>
+<div id="overlay" onclick="closeSidebar()"></div>
+
 
   <!-- HERO -->
   <section id="hero" style="padding:0; border:none;">
@@ -1699,7 +1922,7 @@
           <td><span class="diff-badge diff">Différence</span><br><small>À Rome, les riches dominent la politique. Aujourd'hui, l'égalité des droits est un principe constitutionnel.</small></td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
 
     <!-- Chart comparing -->
     <div class="chart-wrapper fade-in">
@@ -1755,7 +1978,7 @@
       <h4 style="font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;color:var(--red);margin-bottom:6px;">🗺️ L'expansion de l'Empire romain</h4>
       <p style="font-size:0.8rem;color:var(--muted);margin-bottom:20px;font-style:italic;">Carte schématique des conquêtes romaines autour de la Méditerranée</p>
 
-      <svg viewBox="0 0 700 380" style="width:100%;height:auto;max-height:400px;" xmlns="http://www.w3.org/2000/svg">
+      <div class="map-scroll"><svg viewBox="0 0 700 380" style="width:100%;height:auto;max-height:400px;" xmlns="http://www.w3.org/2000/svg">
         <!-- Background sea -->
         <rect width="700" height="380" fill="#B8D4E8" rx="6"/>
 
@@ -1865,7 +2088,7 @@
         <text x="620" y="362" text-anchor="middle" font-family="Cinzel,serif" font-size="8" fill="#2C1810">500 km</text>
       </svg>
 
-      <div class="map-legend">
+      </div><div class="map-legend">
         <div class="legend-item">
           <div class="legend-color" style="background:#8B1A1A;border:2px solid #C9A227;"></div>
           <span>Territoire romain initial (Rome + Italie)</span>
@@ -2330,6 +2553,29 @@
 </main>
 
 <script>
+
+// ===== SIDEBAR MOBILE TOGGLE =====
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  const btn = document.getElementById('hamburger');
+  const ov = document.getElementById('overlay');
+  sb.classList.toggle('open');
+  btn.classList.toggle('open');
+  ov.classList.toggle('visible');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('overlay').classList.remove('visible');
+}
+// Close sidebar when a nav item is clicked on mobile
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#sidebar .nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 900) closeSidebar();
+    });
+  });
+});
 
 function setActiveNav(el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
